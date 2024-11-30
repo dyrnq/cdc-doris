@@ -68,7 +68,9 @@ cd /vagrant/cdc
 
 sleep 10;
 
-docker compose exec -it cdc bash -c "/data/install-flink-cdc.sh"
+docker compose exec -it cdc bash
 
+root@cdc:/opt/flink# /data/install-flink-cdc.sh
 
+root@cdc:/opt/flink# /data/cdc.sh
 ```
