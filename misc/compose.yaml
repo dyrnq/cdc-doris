@@ -1,0 +1,49 @@
+services:
+  redis:
+    image: redis:6.2.16
+    container_name: redis
+    networks:
+      canal:
+  zoo1:
+    image: zookeeper:3.8.4
+    restart: always
+    hostname: zoo1
+    networks:
+      canal:    
+    ports:
+      - 2181:2181
+    volumes:
+      - zoo1_data:/data
+      - zoo1_datalog:/datalog
+      - zoo1_logs:/logs
+    environment:
+      # ZOO_MY_ID: 1
+      ALLOW_ANONYMOUS_LOGIN: "yes"
+      ZOO_4LW_COMMANDS_WHITELIST: "*"
+      # ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
+  zoonavigator:
+    image: elkozmon/zoonavigator:latest
+    restart: always
+    ports:
+      - 39000:9000
+    environment:
+      - HTTP_PORT=9000
+    networks:
+      canal:
+  adminer:
+    image: adminer:4.8.1
+    restart: always
+    ports:
+      - 48080:8080
+    networks:
+      canal:
+
+
+volumes:
+  zoo1_data:
+  zoo1_datalog:
+  zoo1_logs:
+
+networks:
+  canal:
+    external: true

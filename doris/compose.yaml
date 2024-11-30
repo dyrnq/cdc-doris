@@ -1,0 +1,55 @@
+services:
+  doris-fe:
+    image: dyrnq/doris:2.1.7
+    hostname: doris-fe
+    network_mode: host
+    privileged: true
+    environment:
+      - TZ=Asia/Shanghai
+      - RUN_MODE=fe
+      - ENABLE_FQDN_MODE=false
+      - FE_SERVERS=fe1:192.168.56.200:9010
+      - FE_ID=1
+      - FE_PRIORITY_NETWORKS=192.168.56.200/24
+  doris-be:
+    image: dyrnq/doris:2.1.7
+    hostname: doris-be
+    network_mode: host
+    privileged: true
+    environment:
+      - TZ=Asia/Shanghai
+      - RUN_MODE=be
+      - ENABLE_FQDN_MODE=false
+      - FE_SERVERS=fe1:192.168.56.200:9010
+      - BE_ADDR=192.168.56.200:9050
+      - BE_PRIORITY_NETWORKS=192.168.56.200/24
+  mysql:
+    image: debezium/example-mysql:1.1
+    container_name: mysql
+    networks:
+      canal:
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_USER=mysqluser
+      - MYSQL_PASSWORD=mysqlpw
+      - TZ=Asia/Shanghai
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+  postgres:
+    restart: always
+    image: debezium/example-postgres:1.1
+    container_name: postgres
+    networks:
+      canal:
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+networks:
+  canal:
+    external: true
