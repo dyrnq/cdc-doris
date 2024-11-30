@@ -6,6 +6,7 @@ services:
       - ENABLE_BUILT_IN_PLUGINS=flink-s3-fs-presto-1.20.0.jar
       - |
         FLINK_PROPERTIES=
+        execution.checkpointing.interval: 3000
         rest.bind-address: 0.0.0.0
         jobmanager.bind-host: 0.0.0.0
         taskmanager.bind-host: 0.0.0.0
@@ -38,6 +39,7 @@ services:
       - ENABLE_BUILT_IN_PLUGINS=flink-s3-fs-presto-1.20.0.jar
       - |
         FLINK_PROPERTIES=
+        execution.checkpointing.interval: 3000
         rest.bind-address: 0.0.0.0
         jobmanager.bind-host: 0.0.0.0
         taskmanager.bind-host: 0.0.0.0
