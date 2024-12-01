@@ -9,6 +9,7 @@ services:
       - ENABLE_BUILT_IN_PLUGINS=flink-s3-fs-presto-1.20.0.jar
       - |
         FLINK_PROPERTIES=
+        state.backend.type: rocksdb
         execution.checkpointing.interval: 3000
         rest.bind-address: 0.0.0.0
         jobmanager.bind-host: 0.0.0.0
@@ -17,8 +18,8 @@ services:
         high-availability.type: zookeeper
         high-availability.storageDir: s3://flink/ha
         high-availability.zookeeper.quorum: zoo1:2181
-        state.checkpoints.dir: s3://flink-state/flink-checkpoints
-        state.savepoints.dir: s3://flink-state/flink-savepoints
+        execution.checkpointing.dir: s3://flink-state/flink-checkpoints
+        execution.checkpointing.savepoint-dir: s3://flink-state/flink-savepoints
         s3.endpoint: http://192.168.56.200:9000
         s3.path.style.access: true
         s3.access-key: u5SybesIDVX9b6Pk
