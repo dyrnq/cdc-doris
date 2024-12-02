@@ -9,6 +9,7 @@ services:
         state.backend.type: rocksdb
         execution.checkpointing.interval: 3000
         rest.bind-address: 0.0.0.0
+        rest.address: jobmanager
         jobmanager.bind-host: 0.0.0.0
         taskmanager.bind-host: 0.0.0.0
         high-availability.type: zookeeper
