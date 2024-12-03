@@ -74,3 +74,16 @@ root@cdc:/opt/flink# /data/install-flink-cdc.sh
 
 root@cdc:/opt/flink# /data/cdc.sh
 ```
+
+```bash
+## architecture
+                                        minio (s3 cluster)
+                                                ^
+                                                |
+                                                |
+souce mysql 192.168.56.200:3306 ----> flink standalone cluster ----> sink doris(192.168.56.200:8030)
+                                                |
+                                                |
+                                                v
+                                        zookeeper cluster
+```
