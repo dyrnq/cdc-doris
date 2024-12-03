@@ -4,9 +4,9 @@ SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null 2>&1 && pwd -P)
 apt update;
 apt install socat iproute2 -y;
 
-if ! ss -tunlp |grep 8081; then
-    socat TCP-LISTEN:8081,reuseaddr,fork TCP:jobmanager:8081 &
-fi
+# if ! ss -tunlp |grep 8081; then
+#     socat TCP-LISTEN:8081,reuseaddr,fork TCP:jobmanager:8081 &
+# fi
 
 flink_cdc_home="/opt/flink-cdc"
 pushd $flink_cdc_home || exit 1
