@@ -5,7 +5,7 @@ iface="${iface:-enp0s8}"
 cluster_ips="192.168.55.31,192.168.55.32,192.168.55.33"
 IFS=',' read -r -a iparr <<< ${cluster_ips}
 flink_cdc_home="${flink_cdc_home:-/opt/flink-cdc}"
-ver="${ver:-3.2.1}"
+ver="${ver:-3.3.0}"
 
 
 while [ $# -gt 0 ]; do
