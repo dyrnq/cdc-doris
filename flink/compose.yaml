@@ -21,7 +21,7 @@ services:
         s3.path.style.access: true
         s3.access-key: u5SybesIDVX9b6Pk
         s3.secret-key: lOpH1v7kdM6H8NkPu1H2R6gLc9jcsmWM
-        jobmanager.rpc.address: jobmanager
+        # jobmanager.rpc.address: jobmanager
         metrics.reporters: prom
         metrics.reporter.prom.factory.class: org.apache.flink.metrics.prometheus.PrometheusReporterFactory
         metrics.reporter.prom.port: 9091
@@ -55,7 +55,8 @@ services:
         s3.path.style.access: true
         s3.access-key: u5SybesIDVX9b6Pk
         s3.secret-key: lOpH1v7kdM6H8NkPu1H2R6gLc9jcsmWM
-        jobmanager.rpc.address: jobmanager
+        # jobmanager.rpc.address: jobmanager
+        taskmanager.numberOfTaskSlots: 8
         metrics.reporters: prom
         metrics.reporter.prom.factory.class: org.apache.flink.metrics.prometheus.PrometheusReporterFactory
         metrics.reporter.prom.port: 9091

@@ -1,8 +1,8 @@
 #!/bin/bash
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null 2>&1 && pwd -P)
 
-apt update;
-apt install socat iproute2 -y;
+# apt update;
+# apt install socat iproute2 -y;
 
 # if ! ss -tunlp |grep 8081; then
 #     socat TCP-LISTEN:8081,reuseaddr,fork TCP:jobmanager:8081 &
@@ -10,7 +10,9 @@ apt install socat iproute2 -y;
 
 flink_cdc_home="/opt/flink-cdc"
 pushd $flink_cdc_home || exit 1
-./bin/flink-cdc.sh \
+
+sed -i "s@rootLogger.appenderRef.file.ref = FileAppender@rootLogger.appenderRef.file.ref=ConsoleAppender@g" ./conf/log4j-cli.properties
+ROOT_LOG_LEVEL=DEBUG ./bin/flink-cdc.sh \
     "${SCRIPT_DIR}"/mysql-to-doris.yaml \
     --jar lib/mysql-connector-java-8.0.27.jar \
     --target remote

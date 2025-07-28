@@ -33,17 +33,15 @@ Run a small flink-standalone cluster with zookeeper and minio.
 vagrant ssh cdc
 
 cd /vagrant/misc
-./launch.sh
+./launch.sh -d
 
 cd /vagrant/minio
-./launch.sh
+./launch.sh -d
 
-sleep 10;
 
-./init.sh
 
 cd /vagrant/flink
-./launch.sh
+./launch.sh -d
 ```
 
 ## doris
@@ -51,7 +49,7 @@ cd /vagrant/flink
 ```bash
 vagrant ssh cdc
 cd /vagrant/doris
-./launch.sh
+./launch.sh -d
 
 sleep 10;
 
@@ -64,15 +62,13 @@ sleep 10;
 ```bash
 vagrant ssh cdc
 cd /vagrant/cdc
-./launch.sh
+./launch.sh -d
 
-sleep 10;
 
 docker compose exec -it cdc bash
 
-root@cdc:/opt/flink# /data/install-flink-cdc.sh
+root@cdc:/opt/flink# /data/install-flink-cdc.sh && /data/cdc.sh
 
-root@cdc:/opt/flink# /data/cdc.sh
 ```
 
 ```bash

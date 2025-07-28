@@ -9,7 +9,7 @@ services:
     restart: always
     hostname: zoo1
     networks:
-      canal:    
+      canal:
     ports:
       - 2181:2181
     volumes:

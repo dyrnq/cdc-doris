@@ -65,11 +65,41 @@ services:
     ports:
       - "9000:9000"
       - "9001:9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 5s
+      retries: 10      
     depends_on:
-      - minio1
-      - minio2
-      - minio3
-      - minio4
+      minio1:
+        condition: service_healthy
+      minio2:
+        condition: service_healthy
+      minio3:
+        condition: service_healthy
+      minio4:
+        condition: service_healthy
+
+  mc:
+    image: minio/mc
+    container_name: mc
+    networks:
+      canal:
+    depends_on:
+      nginx:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+
+      /usr/bin/mc alias set myminio http://192.168.56.200:9000 minioadmin minioadmin;
+      /usr/bin/mc admin user svcacct add --access-key "u5SybesIDVX9b6Pk" --secret-key "lOpH1v7kdM6H8NkPu1H2R6gLc9jcsmWM" myminio minioadmin 2>/dev/null || true;
+      sleep 5s;
+      /usr/bin/mc mb myminio/flink 2>/dev/null || true;
+      /usr/bin/mc mb myminio/flink-state 2>/dev/null || true;
+      tail -f /dev/null
+      "
+
+
 ## By default this config uses default local driver,
 ## For custom volumes replace with volume driver configuration.
 volumes:
