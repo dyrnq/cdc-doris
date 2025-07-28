@@ -1,9 +1,9 @@
 services:
   jobmanager:
-    image: flink:1.20.0-scala_2.12
+    image: flink:1.20.1-scala_2.12
     container_name: jobmanager
     environment:
-      - ENABLE_BUILT_IN_PLUGINS=flink-s3-fs-presto-1.20.0.jar
+      - ENABLE_BUILT_IN_PLUGINS=flink-s3-fs-presto-1.20.1.jar
       - |
         FLINK_PROPERTIES=
         state.backend.type: rocksdb
@@ -36,9 +36,9 @@ services:
     networks:
       canal:
   taskmanager:
-    image: flink:1.20.0-scala_2.12
+    image: flink:1.20.1-scala_2.12
     environment:
-      - ENABLE_BUILT_IN_PLUGINS=flink-s3-fs-presto-1.20.0.jar
+      - ENABLE_BUILT_IN_PLUGINS=flink-s3-fs-presto-1.20.1.jar
       - |
         FLINK_PROPERTIES=
         state.backend.type: rocksdb

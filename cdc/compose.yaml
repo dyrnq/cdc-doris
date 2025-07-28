@@ -1,12 +1,12 @@
 services:
   cdc:
-    image: flink:1.20.0-scala_2.12
+    image: flink:1.20.1-scala_2.12
     hostname: cdc
     container_name: cdc
     networks:
       canal:
     environment:
-      - ENABLE_BUILT_IN_PLUGINS=flink-s3-fs-presto-1.20.0.jar
+      - ENABLE_BUILT_IN_PLUGINS=flink-s3-fs-presto-1.20.1.jar
       - |
         FLINK_PROPERTIES=
         state.backend.type: rocksdb
